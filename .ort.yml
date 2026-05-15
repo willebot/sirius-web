@@ -1,13 +1,13 @@
 excludes:
   scopes:
     - pattern: "devDependencies"
-      reason: "DEV_TOOL"
+      reason: "BUILD_TOOL_OF"
       comment: "Workspace devDependencies contain cross-workspace @eclipse-sirius/*
         references that ORT cannot resolve (workspace link:true entries resolve to
         projects, not packages). Excluding devDependencies prevents ORT from
         traversing these intra-workspace edges and failing the analyzer."
     - pattern: "peerDependencies"
-      reason: "OTHER"
+      reason: "PROVIDED_BY"
       comment: "All 22 component library workspace packages declare sibling
         @eclipse-sirius/* packages as peerDependencies. ORT follows the link:true
         node_modules entries for these, builds valid identifiers, then cannot find
