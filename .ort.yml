@@ -1,4 +1,26 @@
 excludes:
+  paths:
+    - pattern: "packages/*/frontend/sirius-components-*/**"
+      reason: "BUILD_TOOL_OF"
+      comment: "Internal component library workspace packages. ORT's npm analyzer
+        encounters them both as projects (workspace members) and as package
+        dependencies (link:true entries appear with resolved:file:... in npm list
+        output, making isProject=false), causing a checkReferences() conflict.
+        Excluding these paths removes them from project analysis. Their external
+        third-party dependencies are captured through the main app package
+        (packages/sirius-web/frontend/sirius-web) which bundles them at build time."
+    - pattern: "packages/sirius-web/frontend/sirius-web-application/**"
+      reason: "BUILD_TOOL_OF"
+      comment: "Internal workspace library package — same ORT analyzer conflict as
+        sirius-components-* packages above."
+    - pattern: "packages/sirius-web/frontend/sirius-web-papaya/**"
+      reason: "BUILD_TOOL_OF"
+      comment: "Internal workspace library package — same ORT analyzer conflict as
+        sirius-components-* packages above."
+    - pattern: "packages/sirius-web/frontend/sirius-web-view-fork/**"
+      reason: "BUILD_TOOL_OF"
+      comment: "Internal workspace library package — same ORT analyzer conflict as
+        sirius-components-* packages above."
   scopes:
     - pattern: "devDependencies"
       reason: "BUILD_TOOL_OF"
