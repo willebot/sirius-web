@@ -1,0 +1,9 @@
+excludes:
+  paths:
+    - pattern: "packages/sirius-web/frontend/sirius-web/**"
+      reason: "OTHER"
+      comment: "The sirius-web application package lists all sibling workspace packages
+        as dependencies, causing ORT's NPM analyzer to fail when resolving workspace
+        link:true cross-references. Excluding the app entry allows ORT to analyse
+        the component library workspace packages and their external npm dependencies
+        without the analyzer aborting on unresolvable intra-workspace package identifiers."
