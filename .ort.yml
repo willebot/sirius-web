@@ -1,9 +1,15 @@
 excludes:
-  paths:
-    - pattern: "packages/sirius-web/frontend/sirius-web/**"
+  scopes:
+    - pattern: "devDependencies"
+      reason: "DEV_TOOL"
+      comment: "Workspace devDependencies contain cross-workspace @eclipse-sirius/*
+        references that ORT cannot resolve (workspace link:true entries resolve to
+        projects, not packages). Excluding devDependencies prevents ORT from
+        traversing these intra-workspace edges and failing the analyzer."
+    - pattern: "peerDependencies"
       reason: "OTHER"
-      comment: "The sirius-web application package lists all sibling workspace packages
-        as dependencies, causing ORT's NPM analyzer to fail when resolving workspace
-        link:true cross-references. Excluding the app entry allows ORT to analyse
-        the component library workspace packages and their external npm dependencies
-        without the analyzer aborting on unresolvable intra-workspace package identifiers."
+      comment: "All 22 component library workspace packages declare sibling
+        @eclipse-sirius/* packages as peerDependencies. ORT follows the link:true
+        node_modules entries for these, builds valid identifiers, then cannot find
+        them in the packages map (they are projects). Excluding peerDependencies
+        removes this path entirely."
