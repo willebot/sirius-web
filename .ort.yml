@@ -28,39 +28,3 @@ excludes:
         references that ORT cannot resolve (workspace link:true entries resolve to
         projects, not packages). Excluding devDependencies prevents ORT from
         traversing these intra-workspace edges and failing the analyzer."
-
-resolutions:
-  issues:
-    - message: "401 Unauthorized - GET https://npm.pkg.github.com/download/@ObeoNetwork/react-trello/**"
-      reason: "CANT_FIX_DEPENDENCY"
-      comment: "@ObeoNetwork/react-trello is published to GitHub Package Registry
-        (npm.pkg.github.com), which requires authentication. ORT does not have a
-        GitHub Package Registry token configured, so it cannot download the tarball
-        to compute checksums. The package is correctly identified in the analysis;
-        only the download for scanning fails."
-    - message: "403*npm.pkg.github.com*sirius-components-browser*"
-      reason: "CANT_FIX_DEPENDENCY"
-      comment: "@eclipse-sirius/sirius-components-browser is an internal workspace
-        package published to GitHub Package Registry. ORT attempts to fetch its npm
-        metadata because the package.json declares publishConfig.registry pointing to
-        npm.pkg.github.com. ORT does not have credentials for this registry. The
-        package is an internal workspace member and is path-excluded from project
-        analysis."
-    - message: "Could not get package information for dependency 'fr.obeo.dsl.designer.sample.flow:fr.obeo.dsl.designer.sample.flow.edit:*'*"
-      reason: "CANT_FIX_DEPENDENCY"
-      comment: "fr.obeo.dsl.designer.sample.flow:fr.obeo.dsl.designer.sample.flow.edit
-        is hosted in the private Maven repository at
-        maven.pkg.github.com/ObeoNetwork/Flow-Designer, which requires GitHub
-        authentication. ORT does not have credentials for this repository."
-    - message: "Could not get package information for dependency 'fr.obeo.dsl.designer.sample.flow:fr.obeo.dsl.designer.sample.flow:*'*"
-      reason: "CANT_FIX_DEPENDENCY"
-      comment: "fr.obeo.dsl.designer.sample.flow:fr.obeo.dsl.designer.sample.flow
-        is hosted in the private Maven repository at
-        maven.pkg.github.com/ObeoNetwork/Flow-Designer, which requires GitHub
-        authentication. ORT does not have credentials for this repository."
-    - message: "Could not get package information for dependency 'org.eclipse.sirius:org.eclipse.sirius.emfjson:*'*"
-      reason: "CANT_FIX_DEPENDENCY"
-      comment: "org.eclipse.sirius:org.eclipse.sirius.emfjson is resolved via the
-        private Maven repository at maven.pkg.github.com/ObeoNetwork/Flow-Designer,
-        which requires GitHub authentication. ORT does not have credentials for this
-        repository."
